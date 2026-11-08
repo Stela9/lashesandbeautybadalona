@@ -20,3 +20,4 @@ Web: https://lashesandbeautybadalona.es — sitio estático publicado con Cloudf
 | `blog/` | Índice del blog y un archivo por artículo |
 | `aviso-legal.html`, `privacidad.html`, `cookies.html` | Páginas legales (LSSI y RGPD) |
 | `functions/_middleware.js` | Redirige `www.` y `*.pages.dev` al dominio principal `lashesandbeautybadalona.es` |
+| `tools/carta.js` | Copia la carta de servicios dentro de `index.html` (para que funcione sin JavaScript). **Ejecutar `node tools/carta.js` cada vez que se cambien servicios o precios en `assets/app.js`** |

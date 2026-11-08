@@ -13,12 +13,24 @@ const BF_HASTA = document.getElementById("bf-banner").dataset.hasta;   // se edi
 const BLACK_FRIDAY = [
     { sub:"Promociones Black Friday", note:"Para citas hasta el 30 de noviembre.", items:[
         { name:"Microblading / micropigmentación de cejas", desc:"Cejas perfectas y naturales a un precio único. Incluye un retoque a las 4 semanas.", price:150, old:250, badge:"-40%", wa:true },
-        { name:"Remodelación corporal I-MODEL · Bono 10 sesiones", desc:"Tonificación, reducción de celulitis, quema de grasa y moldeado de la figura. Precio normal: 49 € por sesión.", price:195, old:490, badge:"-60%", wa:true },
-        { name:"Dermapen con exosomas · Bono 4 sesiones", desc:"Regeneración anti-edad extrema: más firmeza y elasticidad, menos arrugas y poros. Precio normal: 79 € por sesión.", price:195, old:316, badge:"-38%", wa:true },
+        { name:"Remodelación corporal I-MODEL · Bono 10 sesiones", desc:"Tonificación, reducción de celulitis, quema de grasa y moldeado de la figura. Precio normal: 49 € por sesión. Bono válido durante 1 año desde la compra.", price:195, old:490, badge:"-60%", wa:true },
+        { name:"Dermapen con exosomas · Bono 4 sesiones", desc:"Regeneración anti-edad extrema: más firmeza y elasticidad, menos arrugas y poros. Precio normal: 79 € por sesión. Bono válido durante 1 año desde la compra.", price:195, old:316, badge:"-38%", wa:true },
         { name:"Hydraface – limpieza facial profunda", desc:"Limpieza profunda, dermoabrasión, exfoliación, extracción de impurezas e hidratación.", time:"1 h 15 min", price:59, old:99, badge:"-40%", wa:true } ]},
 ];
 const BF_ACTIVO = Date.now() < new Date(BF_HASTA).getTime();
 /* ======================== */
+
+/* Descripción de cada foto para quien no puede verla */
+const IMG_ALT = {
+  "lifting-tinte": "Pestañas naturales elevadas y tintadas tras un lifting",
+  "laminado-cejas": "Ceja peinada hacia arriba y fijada con laminado",
+  "efecto-rimel": "Extensiones pelo a pelo con acabado natural efecto rímel",
+  "hibridas": "Extensiones híbridas que mezclan pelo a pelo y volumen",
+  "volumen-3d": "Extensiones de volumen 3D densas y curvadas",
+  "volumen-glam": "Extensiones de volumen glam 5D muy tupidas",
+  "wispy": "Extensiones Wispy con puntas más largas intercaladas",
+  "efecto-mojado": "Extensiones efecto mojado con las pestañas agrupadas en puntas",
+};
 
 /* Fotos de resultados (recortadas del cartel «Realza tu mirada») */
 const IMG = {
@@ -90,7 +102,7 @@ let SERVICES = {
         { name:"Dermapen facial", desc:"Microagujas que estimulan el colágeno, mejorando la textura de la piel y reduciendo arrugas, cicatrices y manchas. Con ácido hialurónico, retinol, vitaminas, niacinamida y sérum efecto bótox.", time:"45 min", price:59 },
         { name:"Dermapen exosomas", desc:"Regeneración anti-edad extrema: aumenta la elasticidad y firmeza, reduce arrugas, mejora la textura, reduce los poros e iguala el tono.", time:"45 min", price:79 },
         { name:"Dermapen labios", desc:"Mejora la hidratación, suaviza las líneas de expresión y rejuvenece la piel de forma natural.", time:"15 min", price:45 } ]},
-    { sub:"Bonos", items:[
+    { sub:"Bonos", note:"Válidos durante 1 año desde la compra.", items:[
         { name:"Bono 3+1 sesión gratis", desc:"Combina las sesiones que más necesites entre limpieza facial profunda, peelings y dermapen, y la cuarta te la llevas de regalo (excepto exosomas).", price:177, old:236, badge:"1 gratis" },
         { name:"Bono 4 sesiones exosomas", desc:"Te regalamos la crema facial Exoskyn de Utsukusy Cosmetics (valorada en 85 €), con exosomas de centella asiática y retinol, para complementar tu tratamiento en casa.", price:290, old:401, badge:"Regalo" } ]},
     { sub:"Depilación facial con hilo", items:[
@@ -100,7 +112,7 @@ let SERVICES = {
         { name:"Depilación facial completa", desc:"Todo el rostro con hilo, recomendada para pieles sensibles.", price:32 } ]},
   ],
   "Tratamientos corporales": [
-    { sub:"I-MODEL · remodelación corporal", items:[
+    { sub:"I-MODEL · remodelación corporal", note:"Bonos válidos durante 1 año desde la compra.", items:[
         { name:"I-MODEL · 1 sesión", desc:"Remodelación corporal en sesiones de 25 minutos: tonificación, reducción de celulitis, quema de grasa y moldeado de glúteos, brazos, piernas, abdomen y espalda.", time:"25 min", price:49 },
         { name:"I-MODEL · Bono 6 sesiones", desc:"Remodelación corporal: tonifica y reduce la grasa almacenada ganando masa muscular.", price:240 },
         { name:"I-MODEL · Bono 10 sesiones", desc:"Remodelación corporal: tonifica y reduce la grasa almacenada ganando masa muscular.", price:290 } ]},
@@ -122,7 +134,7 @@ if (BF_ACTIVO) {
 }
 const cats = ["Todos", ...Object.keys(SERVICES)];
 const card = (s, h = 4) => `
-    <article class="svc${s.img ? ' has-img' : ''}">${s.img ? `<img class="svc-img" src="${IMG[s.img]}" alt="${s.name}" loading="lazy">` : ''}<div class="svc-body">
+    <article class="svc${s.img ? ' has-img' : ''}">${s.img ? `<img class="svc-img" src="${IMG[s.img]}" alt="${IMG_ALT[s.img] || s.name}" loading="lazy" width="124" height="58">` : ''}<div class="svc-body">
       <div class="svc-top">
         <h${h} class="svc-name">${s.name}${s.badge ? ` <span class="badge">${s.badge}</span>` : ''}</h${h}>
         <div class="price">${(s.from ? '<small>desde</small>' : '') + fmt(s.price) + (s.old ? `<s>${fmt(s.old)}</s>` : '')}</div>
@@ -139,20 +151,34 @@ const group = (cat, showTitle) => {
     SERVICES[cat].map(g => `<h${L} class="sub-title">${g.sub}${g.note ? `<span>${g.note}</span>` : ''}</h${L}>` + g.items.map(s => card(s, L + 1)).join("")).join("");
 };
 function render(cat){
-  tabsEl.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.cat === cat));
+  tabsEl.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-pressed", String(t.dataset.cat === cat)));
   listEl.innerHTML = cat === "Todos" ? Object.keys(SERVICES).map(c => group(c, true)).join("") : group(cat, false);
 }
-tabsEl.innerHTML = cats.map(c => `<button class="tab${c === "Black Friday" ? " tab-bf" : ""}" role="tab" data-cat="${c}">${c === "Black Friday" ? "★ Black Friday" : c}</button>`).join("");
-tabsEl.addEventListener("click", e => { if (e.target.dataset.cat) render(e.target.dataset.cat); });
+tabsEl.innerHTML = cats.map(c => `<button type="button" class="tab${c === "Black Friday" ? " tab-bf" : ""}" aria-pressed="false" data-cat="${c}">${c === "Black Friday" ? "★ Black Friday" : c}</button>`).join("");
+tabsEl.addEventListener("click", e => {
+  const b = e.target.closest(".tab"); if (!b) return;
+  render(b.dataset.cat);
+  b.scrollIntoView({ block: "nearest", inline: "nearest" });   // en móvil, que el filtro elegido quede a la vista
+});
 render("Todos");
 
 /* Reseñas: "Leer más" en móvil cuando el texto está recortado */
-document.querySelectorAll(".review").forEach(r => {
+document.querySelectorAll(".review").forEach((r, i) => {
   const q = r.querySelector("blockquote"), btn = document.createElement("button");
+  const who = r.querySelector("figcaption b").textContent;
+  q.id = q.id || "resena-" + (i + 1);
   btn.className = "rv-more"; btn.type = "button"; btn.textContent = "Leer más";
+  btn.setAttribute("aria-expanded", "false"); btn.setAttribute("aria-controls", q.id);
+  btn.setAttribute("aria-label", "Leer la reseña completa de " + who);
   q.after(btn);
   const check = () => btn.classList.toggle("show", r.classList.contains("open") || q.scrollHeight > q.clientHeight + 2);
-  btn.addEventListener("click", () => { r.classList.toggle("open"); btn.textContent = r.classList.contains("open") ? "Leer menos" : "Leer más"; check(); });
+  btn.addEventListener("click", () => {
+    const open = r.classList.toggle("open");
+    btn.textContent = open ? "Leer menos" : "Leer más";
+    btn.setAttribute("aria-expanded", String(open));
+    btn.setAttribute("aria-label", (open ? "Mostrar menos de la reseña de " : "Leer la reseña completa de ") + who);
+    check();
+  });
   check(); window.addEventListener("resize", check);
 });
 
@@ -163,6 +189,7 @@ if (location.hash.startsWith("#articulo-")) location.replace("blog/" + location.
 document.getElementById("map-load").addEventListener("click", () => {
   const box = document.getElementById("map-box");
   box.innerHTML = '<iframe title="Mapa de Lashes & Beauty Badalona" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Lashes+%26+Beauty+Badalona,+Via+Augusta+5,+08911+Badalona&output=embed"></iframe>';
+  box.querySelector("iframe").focus();   // el botón desaparece: el foco pasa al mapa
 });
 
 /* Vídeo: botón de pausa y respeto a «reducir movimiento» */
