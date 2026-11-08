@@ -13,8 +13,8 @@ const BF_HASTA = document.getElementById("bf-banner").dataset.hasta;   // se edi
 const BLACK_FRIDAY = [
     { sub:"Promociones Black Friday", note:"Para citas hasta el 30 de noviembre.", items:[
         { name:"Microblading / micropigmentación de cejas", desc:"Cejas perfectas y naturales a un precio único. Incluye un retoque a las 4 semanas.", price:150, old:250, badge:"-40%" },
-        { name:"Remodelación corporal I-MODEL · Bono 10 sesiones", desc:"Tonificación, reducción de celulitis, quema de grasa y moldeado de la figura.", price:195, old:490, badge:"-60%" },
-        { name:"Dermapen con exosomas · Bono 4 sesiones", desc:"Regeneración anti-edad extrema: más firmeza y elasticidad, menos arrugas y poros.", price:195, old:316, badge:"-38%" },
+        { name:"Remodelación corporal I-MODEL · Bono 10 sesiones", desc:"Tonificación, reducción de celulitis, quema de grasa y moldeado de la figura.", price:195, old:290, badge:"-33%" },
+        { name:"Dermapen con exosomas · Bono 4 sesiones", desc:"Regeneración anti-edad extrema: más firmeza y elasticidad, menos arrugas y poros.", price:195, old:290, badge:"-33%" },
         { name:"Hydraface – limpieza facial profunda", desc:"Limpieza profunda, dermoabrasión, exfoliación, extracción de impurezas e hidratación.", time:"1 h 15 min", price:59, old:99, badge:"-40%" } ]},
 ];
 const BF_ACTIVO = Date.now() < new Date(BF_HASTA).getTime();
@@ -154,29 +154,8 @@ document.querySelectorAll(".review").forEach(r => {
   check(); window.addEventListener("resize", check);
 });
 
-/* Navegación del blog: muestra el artículo o la página principal según el enlace */
-const home = document.getElementById("home"), baseTitle = document.title;
-function route(){
-  const h = decodeURIComponent(location.hash.slice(1));
-  const art = h.startsWith("articulo-") ? document.getElementById(h) : null;
-  document.querySelectorAll(".article-view").forEach(a => a.hidden = a !== art);
-  home.hidden = !!art;
-  document.title = art ? art.dataset.title : baseTitle;
-  const el = !art && h && document.getElementById(h);
-  const go = () => art ? window.scrollTo({ top: 0, behavior: "instant" }) : el && el.scrollIntoView({ behavior: "instant" });
-  requestAnimationFrame(() => requestAnimationFrame(go)); setTimeout(go, 60);
-}
-window.addEventListener("hashchange", route);
-route();
-
-/* Menú en móvil */
-const menuBtn = document.getElementById("menu-btn"), menu = document.getElementById("menu");
-menuBtn.addEventListener("click", () => {
-  const open = menu.classList.toggle("open");
-  menuBtn.setAttribute("aria-expanded", open);
-  menuBtn.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
-});
-menu.addEventListener("click", e => { if (e.target.closest("a")) { menu.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); menuBtn.setAttribute("aria-label", "Abrir menú"); } });
+/* Enlaces antiguos a artículos (#articulo-...) llevan a su nueva página del blog */
+if (location.hash.startsWith("#articulo-")) location.replace("blog/" + location.hash.slice(10) + ".html");
 
 /* Mapa: solo se carga (y solo conecta con Google) cuando la visitante lo pide */
 document.getElementById("map-load").addEventListener("click", () => {

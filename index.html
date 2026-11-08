@@ -52,276 +52,10 @@
 </script>
 <link rel="preload" href="assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/cormorant-600.woff2" as="font" type="font/woff2" crossorigin>
-<style>
-  @font-face{font-family:"Inter";font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/inter-400.woff2) format("woff2")}
-  @font-face{font-family:"Inter";font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/inter-500.woff2) format("woff2")}
-  @font-face{font-family:"Inter";font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/inter-600.woff2) format("woff2")}
-  @font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/cormorant-500.woff2) format("woff2")}
-  @font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/cormorant-600.woff2) format("woff2")}
-  @font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:500;font-display:swap;src:url(assets/fonts/cormorant-500-italic.woff2) format("woff2")}
-  @font-face{font-family:"Bebas Neue";font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/bebas-neue-400.woff2) format("woff2")}
-  :root{
-    --bg:#faf8f4; --bg-alt:#f2eee6; --card:#ffffff; --ink:#1b1916; --muted:#6e675e;
-    --accent:#b08d57; --accent-dark:#7d6034; --gold-soft:#efe5d3; --line:#e5ded2; --wa:#25d366;
-    --night:#161412; --night-2:#211e1a; --ivory:#f5efe4;
-    --radius:18px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
-  a{color:inherit}
-  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
-  h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;line-height:1.1}
-  .eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.75rem;color:var(--accent-dark);font-weight:600}
-
-  /* Header */
-  header{position:sticky;top:0;z-index:20;background:rgba(251,247,244,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
-  .logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
-  .logo .eyes{width:52px;height:auto}
-  .wordmark{font-family:"Bebas Neue",Inter,sans-serif;font-size:1.45rem;letter-spacing:.04em;line-height:1;padding-top:3px}
-  @media (max-width:420px){.wordmark{font-size:1.1rem}.logo .eyes{width:40px}}
-  .hero-logo{width:min(260px,60vw);height:auto;color:var(--ink);margin-bottom:18px;display:block}
-  .foot-logo{width:90px;height:auto;color:var(--ink);display:block;margin:0 auto 12px}
-  .nav ul{display:flex;gap:28px;list-style:none;font-size:.92rem}
-  .nav ul a{text-decoration:none;color:var(--muted)}
-  .nav ul a:hover{color:var(--ink)}
-  
-
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:999px;font-weight:600;font-size:.95rem;text-decoration:none;border:0;cursor:pointer;transition:transform .15s,background .15s}
-  .btn:hover{transform:translateY(-1px)}
-  .btn-primary{background:var(--accent);color:var(--night)}
-  .btn-primary:hover{background:#c4a26c}
-  .btn-ghost{background:transparent;border:1.5px solid var(--ink);color:var(--ink)}
-  .btn-wa{background:var(--wa);color:#fff}
-  .btn-sm{padding:9px 18px;font-size:.85rem}
-
-  /* Hero */
-  .hero{padding:60px 0 52px;color:var(--ivory);background:radial-gradient(circle at 85% 15%,rgba(176,141,87,.28) 0,transparent 45%),radial-gradient(circle at 5% 100%,rgba(176,141,87,.14) 0,transparent 40%),var(--night)}
-  .hero p{color:#c9bfb1 !important}
-  .hero p strong{color:var(--ivory);font-weight:600}
-  .hero h1 em{color:#d4b27a !important}
-  .hero .eyebrow{color:#d4b27a}
-  .hero .badges{color:#a99f92 !important}
-  .hero .badges strong{color:var(--ivory) !important}
-  .hero .hero-logo{color:#d4b27a !important}
-  .hero .btn-primary{background:#d4b27a;color:var(--night)}
-  .hero .btn-primary:hover{background:#e2c48f}
-  .hero .btn-wa{background:transparent;border:1.5px solid #6d655a;color:var(--ivory)}
-  .hero .btn-wa:hover{border-color:var(--ivory)}
-  .hero h1{font-size:clamp(2.6rem,7vw,4.8rem);margin:14px 0 20px}
-  .hero h1 em{color:var(--accent)}
-  .hero p{font-size:1.15rem;color:var(--muted);margin-bottom:32px}
-  .hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
-  .badges{display:flex;gap:28px;flex-wrap:wrap;margin-top:32px;font-size:.9rem;color:var(--muted)}
-  .badges strong{display:block;font-family:"Cormorant Garamond",serif;font-size:1.9rem;color:var(--ink)}
-
-  section{padding:52px 0}
-  .section-head{text-align:center;margin-bottom:28px}
-  .section-head h2{font-size:clamp(2rem,5vw,3rem);margin-top:8px}
-  .section-head p{color:var(--muted);margin-top:10px}
-
-  /* Highlights */
-  .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
-  .feature{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
-  .feature .ico{font-size:1.2rem;color:var(--accent)}
-  .feature h3{font-size:1.5rem;margin:10px 0 6px}
-  .feature p{color:var(--muted);font-size:.93rem}
-
-  /* Services */
-  #servicios{background:var(--bg-alt)}
-  .tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
-  .tab{background:transparent;border:1.5px solid var(--line);padding:9px 20px;border-radius:999px;font:inherit;font-size:.9rem;cursor:pointer;color:var(--muted)}
-  .tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
-  .services{display:grid;grid-template-columns:1fr 1fr;column-gap:44px;row-gap:0}
-  @media (max-width:760px){.services{grid-template-columns:1fr}}
-  .svc{padding:12px 0;display:flex;flex-direction:column;gap:2px;border-bottom:1px solid var(--line)}
-  .svc-top{display:flex;justify-content:space-between;gap:16px;align-items:baseline}
-  .svc h3{font-family:Inter,sans-serif;font-size:.97rem;font-weight:600;line-height:1.35}
-  .price{font-family:"Cormorant Garamond",serif;font-size:1.4rem;line-height:1;font-weight:600;white-space:nowrap;color:var(--accent-dark)}
-  .price small{font-family:Inter,sans-serif;font-size:.72rem;color:var(--muted);font-weight:500;margin-right:3px}
-  .price s{font-family:Inter,sans-serif;font-size:.8rem;color:var(--muted);font-weight:400;margin-left:4px}
-  .svc p{color:var(--muted);font-size:.84rem;line-height:1.5}
-  .svc .meta{font-size:.78rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center;padding-top:2px}
-  .svc .meta a{color:var(--accent-dark);font-weight:600;text-decoration:none}
-  .badge{display:inline-block;background:var(--gold-soft);color:var(--accent-dark);font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:999px;vertical-align:2px;white-space:nowrap}
-  .finance{margin:28px auto 0;max-width:720px;background:var(--night);color:var(--ivory);border:1px solid var(--accent);text-align:center;border-radius:14px;padding:14px 20px;font-weight:500;font-size:.95rem}
-  .svc .ret{color:var(--ink);font-size:.8rem;background:var(--gold-soft);border-radius:6px;padding:1px 8px;align-self:flex-start;margin:2px 0}
-  .cat-title{grid-column:1/-1;font-size:clamp(1.9rem,4vw,2.4rem);margin:24px 0 0;padding-bottom:10px;border-bottom:1px solid var(--accent);color:var(--ink)}
-  .cat-title:first-child{margin-top:0}
-  .sub-title{grid-column:1/-1;font-family:Inter,sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:.16em;color:var(--accent-dark);font-weight:600;margin:22px 0 2px;padding-bottom:6px;border-bottom:1px solid var(--accent)}
-  .sub-title span{text-transform:none;letter-spacing:0;color:var(--muted);font-weight:400;margin-left:8px;font-size:.85rem}
-  .svc .meta .instore{font-size:.75rem;color:var(--accent-dark);background:var(--gold-soft);padding:3px 10px;border-radius:999px;font-weight:500}
-  .posts{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-  .post-card{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;text-decoration:none;transition:transform .15s,box-shadow .15s}
-  .post-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(22,20,18,.08)}
-  .post-card .kicker{font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--accent-dark);font-weight:600}
-  .post-card h3{font-size:1.45rem}
-  .post-card p{color:var(--muted);font-size:.93rem}
-  .post-card .more{margin-top:auto;color:var(--accent-dark);font-weight:600;font-size:.9rem}
-  .note a{color:var(--accent-dark);font-weight:600;text-decoration:none}
-  .note{text-align:center;font-size:.85rem;color:var(--muted);margin-top:28px}
-
-  /* Visit */
-  .visit{display:grid;grid-template-columns:1fr 1.3fr;gap:32px;align-items:stretch}
-  @media (max-width:820px){.visit{grid-template-columns:1fr}}
-  .info{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:32px}
-  .info h3{font-size:1.6rem;margin-bottom:6px}
-  .info .block{margin-bottom:22px}
-  .info .label{font-size:.75rem;text-transform:uppercase;letter-spacing:.14em;color:var(--accent-dark);font-weight:600;margin-bottom:4px}
-  .hours{width:100%;border-collapse:collapse;font-size:.93rem}
-  .hours td{padding:4px 0;border-bottom:1px dashed var(--line)}
-  .hours td:last-child{text-align:right}
-  .map{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);min-height:360px}
-  .map iframe{width:100%;height:100%;min-height:360px;border:0;display:block}
-
-  /* CTA band */
-  .band{background:var(--night);color:#fff;text-align:center;border-radius:28px;padding:44px 24px}
-  .band h2{font-size:clamp(2rem,5vw,3rem);margin-bottom:12px}
-  .band p{color:#d8ccc6;margin-bottom:28px}
-  .band .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  .band .btn-ghost{border-color:#fff;color:#fff}
-
-  footer{padding:28px 0;text-align:center;font-size:.85rem;color:var(--muted)}
-  footer a{color:var(--accent-dark)}
-
-  /* Floating WhatsApp */
-  .wa-float{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:30}
-  .wa-float svg{width:30px;height:30px;fill:#fff}
-  .wrap.narrow{max-width:760px}
-  .btn-gold{background:var(--accent);color:var(--night)}
-  .btn-gold:hover{background:#c4a26c}
-  .btn-outline{border:1.5px solid #6d655a;color:var(--ivory)}
-  .btn-outline:hover{border-color:var(--ivory)}
-  .post-hero{background:radial-gradient(circle at 85% 15%,rgba(176,141,87,.28) 0,transparent 45%),var(--night);color:var(--ivory);padding:50px 0 44px}
-  .post-hero h1{font-size:clamp(2.1rem,5.5vw,3.4rem);margin-top:12px}
-  .post-hero .sub{color:#c9bfb1;margin-top:12px;font-size:1.1rem}
-  .back{display:inline-block;color:#c9bfb1;text-decoration:none;font-size:.88rem;margin-bottom:22px}
-  .back:hover{color:var(--ivory)}
-  .post{padding:36px 20px 20px;font-size:1.05rem}
-  .post .lead{font-size:1.2rem;color:var(--ink);margin-bottom:10px}
-  .post h2{font-size:clamp(1.6rem,4vw,2rem);margin:40px 0 12px}
-  .post p{margin:0 0 16px;color:#3a352f}
-  .post ul,.post ol{margin:0 0 18px 22px;color:#3a352f}
-  .post li{margin-bottom:8px}
-  .post li::marker{color:var(--accent)}
-  .post strong{color:var(--ink)}
-  .timeline{border-left:2px solid var(--accent);margin:20px 0 10px 6px;padding-left:24px}
-  .timeline>div{position:relative;margin-bottom:22px}
-  .timeline>div::before{content:"";position:absolute;left:-31px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--bg)}
-  .timeline b{font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent-dark)}
-  .timeline p{margin:4px 0 0}
-  .prices{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;margin:40px 0}
-  .prices h3{font-size:1.5rem;margin-bottom:14px}
-  .prices h3 span{font-family:Inter,sans-serif;font-size:.72rem;background:var(--gold-soft);color:var(--accent-dark);padding:3px 10px;border-radius:999px;vertical-align:4px;margin-left:6px}
-  .prices ul{list-style:none;margin:0}
-  .prices li{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px dashed var(--line);margin:0}
-  .prices li b{white-space:nowrap;color:var(--accent-dark)}
-  .prices s{color:var(--muted);font-weight:400;font-size:.85em;margin-left:4px}
-  .prices .small{font-size:.85rem;color:var(--muted);margin:12px 0 0}
-  .cta{background:var(--night);color:var(--ivory);border-radius:24px;padding:40px 28px;text-align:center;margin:30px 0}
-  .cta h3{font-size:1.9rem;margin-bottom:8px}
-  .cta p{color:#c9bfb1;margin-bottom:22px}
-  .cta .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  .more-posts{padding:40px 0 52px;background:var(--bg-alt)}
-  .more-posts.first{padding-top:60px}
-  .section-title{font-size:2rem;margin-bottom:24px}
-  .post-hero .eyebrow{display:block;color:#d4b27a}
-  .article-view .post-card h3{font-size:1.45rem}
-  [hidden]{display:none !important}
-
-  .centro{padding:56px 0;background:var(--bg-alt)}
-  .centro-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
-  .centro-text h2{font-size:clamp(2.2rem,5vw,3.2rem);margin:10px 0 18px}
-  .centro-text p{color:var(--muted);font-size:1.08rem;margin-bottom:28px;max-width:46ch}
-  .centro-text .ctas{display:flex;gap:12px;flex-wrap:wrap}
-  .video-frame{justify-self:center;width:min(280px,100%);aspect-ratio:9/16;border-radius:28px;overflow:hidden;background:var(--night);box-shadow:0 24px 60px rgba(22,20,18,.22);outline:1px solid var(--accent);outline-offset:8px}
-  .video-frame video{width:100%;height:100%;object-fit:cover;display:block}
-  @media (max-width:820px){.centro{padding:44px 0}.centro-grid{grid-template-columns:1fr;gap:28px}.video-frame{width:min(230px,66%)}}
-  .regalo{background:var(--bg)}
-  .regalo-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:center}
-  .regalo-text h2{font-size:clamp(2rem,4.5vw,3rem);margin:10px 0 14px}
-  .regalo-text p{color:var(--muted);font-size:1.05rem;margin-bottom:12px;max-width:52ch}
-  .regalo-text .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
-  .gift-card{justify-self:center;width:min(400px,100%);aspect-ratio:1.6;border-radius:22px;padding:26px 28px;display:flex;flex-direction:column;color:#d4b27a;
-    background:radial-gradient(circle at 90% 0%,rgba(212,178,122,.35),transparent 55%),linear-gradient(135deg,#221f1b,#121110);
-    box-shadow:0 24px 50px rgba(22,20,18,.28);outline:1px solid var(--accent);outline-offset:7px;transform:rotate(-3deg)}
-  .gift-card svg{width:92px;height:auto}
-  .gc-brand{font-family:"Bebas Neue",sans-serif;letter-spacing:.08em;color:var(--ivory);font-size:1.05rem;margin-top:12px}
-  .gc-title{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:clamp(2rem,6vw,2.6rem);line-height:1;margin-top:auto}
-  .gc-for{font-size:.8rem;color:#bdb3a6;margin-top:8px;letter-spacing:.04em}
-  @media (max-width:820px){.regalo-grid{grid-template-columns:1fr;gap:36px}.gift-card{width:min(340px,92%)}}
-  @media (max-width:600px){section{padding:36px 0}.hero{padding:36px 0 34px}.hero-logo{width:150px}
-    .badges{margin-top:24px;gap:10px;display:grid;grid-template-columns:repeat(3,1fr);font-size:.78rem}.badges strong{font-size:1.5rem}
-    .features{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.feature h3{overflow-wrap:anywhere;hyphens:auto}.feature{padding:14px}.feature .ico{display:none}.feature h3{font-size:1.25rem;margin:4px 0}.feature p{font-size:.82rem}
-    .tabs{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;margin:0 -20px 20px;padding:0 20px 6px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto}
-    .video-frame{width:min(200px,58%)}}
-  .bf-banner{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:10px 20px;background:linear-gradient(90deg,#0f0e0c,#2a241b 50%,#0f0e0c);color:var(--ivory);text-decoration:none;font-size:.88rem;text-align:center;border-bottom:1px solid var(--accent)}
-  .bf-tag{font-family:"Bebas Neue",sans-serif;letter-spacing:.12em;font-size:1.05rem;background:linear-gradient(90deg,#c9a45e,#f1d79b,#c9a45e);color:#141210;padding:2px 12px;border-radius:4px}
-  .bf-text b{color:#e2c48f}
-  .bf-cta{color:#e2c48f;font-weight:600;white-space:nowrap}
-  .tab-bf{background:#141210 !important;border-color:#c9a45e !important;color:#e2c48f !important;font-weight:600}
-  .tab-bf[aria-selected="true"]{box-shadow:0 0 0 2px #e2c48f inset}
-  .bf-short{display:none}
-  @media (max-width:760px){.bf-banner{gap:4px 8px;font-size:.8rem;padding:8px 12px;flex-wrap:wrap}.bf-long{display:none}.bf-short{display:inline}.bf-tag{font-size:.9rem;padding:1px 8px;white-space:nowrap}.bf-short,.bf-cta{white-space:nowrap}}
-  .svc-body{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
-  .svc.has-img{flex-direction:row;gap:14px;align-items:flex-start}
-  .svc-img{width:124px;height:58px;object-fit:cover;border-radius:10px;flex:0 0 auto;margin-top:3px;box-shadow:0 0 0 1px var(--line)}
-  @media (max-width:600px){.svc-img{width:92px;height:46px;border-radius:8px}.svc.has-img{gap:12px}}
-  .resenas{background:var(--night);color:var(--ivory)}
-  .resenas .section-head h2{color:var(--ivory)}
-  .resenas .eyebrow{color:#d4b27a}
-  .resenas .note a{color:#d4b27a}
-  .reviews{columns:3;column-gap:16px}
-  .review{break-inside:avoid;margin:0 0 16px;background:#1f1c19;border:1px solid #3a342c;border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:12px}
-  .rv-stars{color:#e2b85c;letter-spacing:2px;font-size:1rem}
-  .review blockquote{margin:0;font-size:.95rem;line-height:1.6;color:#e7dfd2;flex:1}
-  .review blockquote::before{content:"“";font-family:"Cormorant Garamond",serif;font-size:2.4rem;line-height:0;vertical-align:-.45em;color:#d4b27a;margin-right:4px}
-  .review figcaption{display:flex;align-items:center;gap:10px}
-  .review figcaption b{display:block;font-size:.9rem;color:var(--ivory)}
-  .review figcaption small{display:block;font-size:.75rem;color:#a99f92}
-  .rv-avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#d4b27a;color:var(--night);font-weight:600;flex:0 0 auto}
-  @media (max-width:900px){.reviews{columns:auto;display:grid;align-items:start;grid-auto-flow:column;grid-auto-columns:min(82%,320px);overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;margin:0 -20px;padding:0 20px 8px;scrollbar-width:none}
-    .reviews::-webkit-scrollbar{display:none}.review{margin:0;scroll-snap-align:start}
-    .review blockquote{display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden}
-    .review.open blockquote{display:block}
-    .rv-more{background:none;border:0;padding:0;font:inherit;font-size:.82rem;color:#d4b27a;font-weight:600;cursor:pointer;align-self:flex-start;margin-top:-6px}}
-  .rv-more{display:none}
-  @media (max-width:900px){.rv-more.show{display:inline}}
-  /* --- Mejoras de la auditoría --- */
-  .skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--night);color:var(--ivory);padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:600}
-  .skip:focus{top:12px}
-  #main{display:block;height:0}
-  a:focus-visible,button:focus-visible{outline:2px solid var(--accent-dark);outline-offset:3px;border-radius:6px}
-  .menu-btn{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:var(--card);cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:0}
-  .menu-btn span{display:block;width:20px;height:2px;background:var(--ink);border-radius:2px;transition:transform .2s,opacity .2s}
-  .menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-  .menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
-  .menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-  @media (max-width:760px){
-    .nav{gap:10px}.logo{margin-right:auto}
-    .menu-btn{display:flex;order:3}
-    .nav ul{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 18px 30px rgba(22,20,18,.12);padding:6px 0}
-    .nav ul.open{display:flex}
-    .nav ul a{display:block;padding:14px 20px;font-size:1rem;color:var(--ink)}
-  }
-  .map-ph{height:100%;min-height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;background:radial-gradient(circle at 30% 20%,rgba(176,141,87,.18),transparent 55%),var(--bg-alt)}
-  .map-addr{font-family:"Cormorant Garamond",serif;font-size:1.5rem;color:var(--ink)}
-  .map-note{font-size:.8rem;color:var(--muted);max-width:32ch}
-  .video-wrap{display:flex;flex-direction:column;align-items:center;gap:22px}
-  .video-btn{background:transparent;border:1px solid var(--line);border-radius:999px;padding:10px 18px;min-height:44px;font:inherit;font-size:.85rem;color:var(--ink);cursor:pointer}
-  .svc .meta a{display:inline-flex;align-items:center;min-height:32px;padding:4px 0 4px 12px}
-  .rv-source{font-size:.8rem;color:#a99f92 !important;margin-bottom:-14px}
-  .resenas .rv-source{color:#bdb3a6 !important}
-  .info a:not(.btn){display:inline-block;padding:6px 0}
-  footer a{display:inline-block;padding:8px 4px}
-  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none !important}}
-  @media (max-width:420px){.nav .logo{gap:8px}.logo .eyes{width:32px}.wordmark{font-size:.98rem;white-space:nowrap}.nav .btn-sm{padding:9px 14px}}
-  @media (max-width:350px){.wordmark{white-space:normal;font-size:.9rem}}
-</style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<a class="skip" href="#main">Saltar al contenido</a>
+<a class="skip" href="#contenido">Saltar al contenido</a>
 
 <header>
   <div class="wrap nav">
@@ -342,14 +76,14 @@
 <aside aria-label="Promoción Black Friday">
 <a id="bf-banner" class="bf-banner" href="#servicios" data-hasta="2026-12-01T00:00:00+01:00">
   <span class="bf-tag">Black Friday</span>
-  <span class="bf-text bf-long">Hasta <b>-60%</b> en microblading, I-MODEL, dermapen con exosomas e Hydraface · Para citas hasta el 30 de noviembre</span>
-  <span class="bf-text bf-short">Hasta <b>-60%</b> · hasta el 30/11</span>
+  <span class="bf-text bf-long">Hasta <b>-40%</b> en microblading, I-MODEL, dermapen con exosomas e Hydraface · Para citas hasta el 30 de noviembre</span>
+  <span class="bf-text bf-short">Hasta <b>-40%</b> · hasta el 30/11</span>
   <span class="bf-cta">Ver promos →</span>
 </a>
 <script src="assets/bf.js"></script>
 </aside>
 <main id="home">
-<span id="main" tabindex="-1"></span>
+<span id="contenido" tabindex="-1"></span>
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
@@ -363,7 +97,7 @@
       </div>
       <div class="badges">
         <div><strong>4,8 ★</strong>Valoración en Treatwell</div>
-        <div><strong>+400</strong>Opiniones de clientas</div>
+        <div><strong>+500</strong>Opiniones de clientas</div>
         <div><strong>L2</strong>Metro Pompeu Fabra</div>
       </div>
     </div>
@@ -498,25 +232,26 @@
         <p>Resolvemos las dudas más frecuentes sobre cejas, pestañas y cuidado facial.</p>
       </div>
       <div class="posts">
-        <a class="post-card" href="#articulo-depilacion-facial-con-hilo">
+        <a class="post-card" href="blog/depilacion-facial-con-hilo.html">
       <span class="kicker">Depilación · 4 min de lectura</span>
       <h3>Por qué la depilación facial con hilo es la mejor opción para tu piel</h3>
       <p>Precisa, higiénica y respetuosa incluso con las pieles más sensibles. Te contamos por qué el hilo es nuestra técnica favorita para cejas y rostro.</p>
       <span class="more">Leer artículo →</span>
     </a>
-        <a class="post-card" href="#articulo-microblading-proceso-cicatrizacion">
+        <a class="post-card" href="blog/microblading-proceso-cicatrizacion.html">
       <span class="kicker">Cejas · 6 min de lectura</span>
       <h3>Microblading: en qué consiste y cómo es el proceso de cicatrización día a día</h3>
       <p>Qué esperar en la sesión, cómo evoluciona la ceja día a día y los cuidados para que el resultado sea perfecto y duradero.</p>
       <span class="more">Leer artículo →</span>
     </a>
-        <a class="post-card" href="#articulo-extensiones-de-pestanas-no-debilitan">
+        <a class="post-card" href="blog/extensiones-de-pestanas-no-debilitan.html">
       <span class="kicker">Pestañas · 5 min de lectura</span>
       <h3>¿Las extensiones de pestañas debilitan tus pestañas? La verdad cuando las aplica una profesional</h3>
       <p>Es uno de los mitos más extendidos. Te explicamos qué daña realmente las pestañas y por qué una buena aplicación las mantiene sanas.</p>
       <span class="more">Leer artículo →</span>
     </a>
       </div>
+      <p class="note"><a href="blog/">Ver todos los artículos →</a></p>
     </div>
   </section>
 
@@ -574,268 +309,6 @@
   </section>
 </main>
 
-<!-- ARTÍCULOS DEL BLOG -->
-<main class="article-view" id="articulo-depilacion-facial-con-hilo" data-title="Por qué la depilación facial con hilo es la mejor opción para tu piel | Lashes &amp; Beauty Badalona" hidden>
-  <section class="post-hero">
-    <div class="wrap narrow">
-      <a class="back" href="#blog">← Volver al blog</a>
-      <span class="eyebrow">Depilación · 4 min de lectura</span>
-      <h1>Por qué la depilación facial con hilo es la mejor opción para tu piel</h1>
-    </div>
-  </section>
-  <article class="wrap narrow post">
-
-<p class="lead">La depilación con hilo es una técnica milenaria de origen oriental que se ha convertido en la favorita de quienes buscan unas cejas perfectas y un rostro sin vello sin castigar la piel. Con un simple hilo de algodón retorcido se atrapan los pelos uno a uno, o en pequeñas filas, y se extraen desde la raíz.</p>
-
-<h2>1. Es la técnica más respetuosa con la piel</h2>
-<p>La cera, sobre todo la caliente, no solo arranca el vello: también se adhiere a la capa más superficial de la piel y tira de ella. En una zona tan fina y delicada como el rostro esto puede provocar rojeces, irritación e incluso pequeñas lesiones.</p>
-<p>El hilo, en cambio, <strong>solo toca el pelo</strong>. No hay calor, no hay productos químicos y no se arrastra la piel. Por eso es la opción recomendada si:</p>
-<ul>
-  <li>Tienes la piel sensible, reactiva o con tendencia a la rojez.</li>
-  <li>Utilizas cremas con retinol, ácidos exfoliantes o tratamientos dermatológicos que adelgazan la piel (en estos casos la cera puede causar quemaduras o heridas).</li>
-  <li>Tienes acné o rosácea en la zona.</li>
-</ul>
-
-<h2>2. Precisión milimétrica para unas cejas perfectas</h2>
-<p>Al trabajar casi pelo a pelo, el hilo permite un control que ni la cera ni las pinzas igualan. Podemos definir líneas limpias, respetar la forma natural de tu ceja y corregir solo lo necesario. Por eso en nuestro servicio de <strong>diseño + depilación de cejas</strong> primero tomamos medidas según tus facciones y después damos forma con hilo.</p>
-
-<h2>3. Elimina hasta el vello más fino</h2>
-<p>El hilo atrapa también la pelusilla más corta y fina del labio superior, el mentón o las patillas, que muchas veces se escapa con la cera. El resultado es una piel más uniforme, que además luce mejor el maquillaje.</p>
-
-<h2>4. Resultados duraderos</h2>
-<p>Como el pelo se extrae desde la raíz, el resultado dura de <strong>3 a 5 semanas</strong>, según tu ritmo de crecimiento. Con sesiones regulares, muchas clientas notan que el vello vuelve a crecer más fino y menos denso.</p>
-
-<h2>5. Rápida e higiénica</h2>
-<p>Una depilación de cejas con hilo dura unos 15 minutos y el rostro completo, poco más. Se usa <strong>un hilo nuevo para cada clienta</strong> y no se reutiliza ningún producto, lo que la convierte en una de las técnicas más higiénicas que existen.</p>
-
-<h2>¿Duele?</h2>
-<p>Se nota un pequeño pellizco, similar al de las pinzas pero mucho más rápido. La mayoría de personas lo tolera muy bien y la sensación disminuye con las sesiones. Las posibles rojeces desaparecen en pocos minutos.</p>
-
-<h2>Consejos antes y después</h2>
-<ul>
-  <li>Deja crecer el vello al menos 2 semanas para que el hilo pueda atraparlo bien.</li>
-  <li>Evita exfoliantes y ácidos el día antes y el día después.</li>
-  <li>Durante las primeras horas, no te maquilles la zona ni tomes el sol directo.</li>
-</ul>
-
-<div class="prices">
-  <h3>Depilación con hilo en Lashes &amp; Beauty Badalona</h3>
-  <ul>
-    <li><span>Cejas</span><b>11 €</b></li>
-    <li><span>Diseño + depilación de cejas</span><b>16 €</b></li>
-    <li><span>Labio superior</span><b>6 €</b></li>
-    <li><span>Mentón</span><b>6 €</b></li>
-    <li><span>Patillas</span><b>11 €</b></li>
-    <li><span>Depilación facial completa</span><b>32 €</b></li>
-  </ul>
-</div>
-
-    <div class="cta">
-      <h3>¿Tienes dudas o quieres reservar?</h3>
-      <p>Escríbenos y te asesoramos sin compromiso, o reserva directamente tu cita online.</p>
-      <div class="ctas">
-        <a class="btn btn-gold js-book" href="#" target="_blank" rel="noopener">Reservar cita</a>
-        <a class="btn btn-outline js-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
-      </div>
-    </div>
-  </article>
-  <section class="more-posts">
-    <div class="wrap">
-      <h2 class="section-title">Sigue leyendo</h2>
-      <div class="posts">
-        <a class="post-card" href="#articulo-microblading-proceso-cicatrizacion">
-      <span class="kicker">Cejas · 6 min de lectura</span>
-      <h3>Microblading: en qué consiste y cómo es el proceso de cicatrización día a día</h3>
-      <p>Qué esperar en la sesión, cómo evoluciona la ceja día a día y los cuidados para que el resultado sea perfecto y duradero.</p>
-      <span class="more">Leer artículo →</span>
-    </a><a class="post-card" href="#articulo-extensiones-de-pestanas-no-debilitan">
-      <span class="kicker">Pestañas · 5 min de lectura</span>
-      <h3>¿Las extensiones de pestañas debilitan tus pestañas? La verdad cuando las aplica una profesional</h3>
-      <p>Es uno de los mitos más extendidos. Te explicamos qué daña realmente las pestañas y por qué una buena aplicación las mantiene sanas.</p>
-      <span class="more">Leer artículo →</span>
-    </a>
-      </div>
-    </div>
-  </section>
-</main>
-<main class="article-view" id="articulo-microblading-proceso-cicatrizacion" data-title="Microblading: en qué consiste y cómo es el proceso de cicatrización día a día | Lashes &amp; Beauty Badalona" hidden>
-  <section class="post-hero">
-    <div class="wrap narrow">
-      <a class="back" href="#blog">← Volver al blog</a>
-      <span class="eyebrow">Cejas · 6 min de lectura</span>
-      <h1>Microblading: en qué consiste y cómo es el proceso de cicatrización día a día</h1>
-    </div>
-  </section>
-  <article class="wrap narrow post">
-
-<p class="lead">El microblading es una técnica de micropigmentación semipermanente que dibuja <strong>trazos finos que imitan el pelo natural</strong> de la ceja. Es ideal si tienes cejas despobladas, huecos, asimetrías o simplemente quieres levantarte con unas cejas definidas sin necesidad de maquillarlas.</p>
-
-<h2>¿Cómo se hace?</h2>
-<p>A diferencia de la micropigmentación con máquina, el microblading se realiza con un <strong>instrumento manual</strong> con microagujas muy finas que deposita el pigmento en las capas superficiales de la piel, trazo a trazo. Así se consigue un efecto pelo a pelo muy natural.</p>
-
-<h2>Así es la sesión paso a paso</h2>
-<ol>
-  <li><strong>Valoración y diseño.</strong> Analizamos tu rostro, tomamos medidas y dibujamos la forma ideal de tus cejas. No empezamos hasta que te encanta el diseño.</li>
-  <li><strong>Elección del color.</strong> Seleccionamos el pigmento según tu tono de piel, tu color de pelo y tus cejas naturales.</li>
-  <li><strong>Anestesia tópica.</strong> Aplicamos una crema anestésica para que la sesión sea lo más cómoda posible.</li>
-  <li><strong>Trazado.</strong> Dibujamos cada pelo siguiendo la dirección natural de crecimiento.</li>
-  <li><strong>Revisión final.</strong> Comprobamos simetría y te explicamos los cuidados.</li>
-</ol>
-<p>La sesión completa dura alrededor de <strong>1 h 30 min</strong>.</p>
-
-<h2>El proceso de cicatrización, día a día</h2>
-<p>Es muy importante saber que <strong>el resultado del primer día no es el definitivo</strong>. La ceja pasa por varias fases antes de mostrar su color real:</p>
-
-<div class="timeline">
-  <div><b>Días 1–3</b><p>El color se ve más oscuro e intenso de lo que será al final y los trazos más marcados. Puede haber una ligera rojez o inflamación. Es completamente normal.</p></div>
-  <div><b>Días 4–10</b><p>Empieza la descamación: se forman pequeñas costras finas y puede picar. <strong>No rasques ni arranques las pieles</strong>: se llevarían el pigmento.</p></div>
-  <div><b>Días 10–21</b><p>Al caer las costras, la ceja puede verse muy clara o parecer que algunos trazos han desaparecido. Es la fase "fantasma": el pigmento sigue ahí, cubierto por piel nueva.</p></div>
-  <div><b>Semanas 3–4</b><p>La piel se regenera y el color reaparece, ya con su tono definitivo, más suave y natural.</p></div>
-  <div><b>Semana 4–6: retoque</b><p>Revisamos el resultado, rellenamos los trazos que hayan retenido menos pigmento y ajustamos detalles. <strong>Nuestros precios incluyen este retoque a las 4 semanas.</strong></p></div>
-</div>
-
-<h2>Cuidados después del microblading</h2>
-<ul>
-  <li>No mojes las cejas durante los primeros 7–10 días; lávate la cara evitando la zona.</li>
-  <li>Aplica la crema regeneradora que te indiquemos, en capa muy fina.</li>
-  <li>No te maquilles las cejas hasta que haya terminado la descamación.</li>
-  <li>Evita sol directo, rayos UVA, sauna, piscina, playa y ejercicio intenso con mucho sudor durante 2 semanas.</li>
-  <li>No uses retinol, ácidos ni exfoliantes cerca de las cejas.</li>
-  <li>No rasques ni arranques las costras.</li>
-</ul>
-
-<h2>¿Cuánto dura?</h2>
-<p>El microblading dura aproximadamente entre <strong>12 y 18 meses</strong>, dependiendo del tipo de piel (las pieles grasas lo retienen menos), la exposición al sol y la rutina de cuidado. Para mantenerlo perfecto, recomendamos un retoque anual.</p>
-
-<h2>¿Puedo hacérmelo?</h2>
-<p>Consúltanos antes si estás embarazada o en período de lactancia, tomas anticoagulantes, tienes diabetes, problemas de cicatrización (queloides) o alguna afección activa en la piel de la zona. En la valoración previa resolveremos todas tus dudas.</p>
-
-<div class="prices">
-  <h3>Cejas semipermanentes en Lashes &amp; Beauty Badalona <span>-20% dto</span></h3>
-  <ul>
-    <li><span>Microblading (efecto pelo a pelo)</span><b>200 € <s>250 €</s></b></li>
-    <li><span>Micropigmentación (sombreado)</span><b>200 € <s>250 €</s></b></li>
-    <li><span>Hybrid brows (técnica mixta)</span><b>224 € <s>280 €</s></b></li>
-    <li><span>Retoque anual</span><b>110 €</b></li>
-  </ul>
-  <p class="small">Los precios incluyen un retoque a las 4 semanas.</p>
-</div>
-
-    <div class="cta">
-      <h3>¿Tienes dudas o quieres reservar?</h3>
-      <p>Escríbenos y te asesoramos sin compromiso, o reserva directamente tu cita online.</p>
-      <div class="ctas">
-        <a class="btn btn-gold js-book" href="#" target="_blank" rel="noopener">Reservar cita</a>
-        <a class="btn btn-outline js-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
-      </div>
-    </div>
-  </article>
-  <section class="more-posts">
-    <div class="wrap">
-      <h2 class="section-title">Sigue leyendo</h2>
-      <div class="posts">
-        <a class="post-card" href="#articulo-depilacion-facial-con-hilo">
-      <span class="kicker">Depilación · 4 min de lectura</span>
-      <h3>Por qué la depilación facial con hilo es la mejor opción para tu piel</h3>
-      <p>Precisa, higiénica y respetuosa incluso con las pieles más sensibles. Te contamos por qué el hilo es nuestra técnica favorita para cejas y rostro.</p>
-      <span class="more">Leer artículo →</span>
-    </a><a class="post-card" href="#articulo-extensiones-de-pestanas-no-debilitan">
-      <span class="kicker">Pestañas · 5 min de lectura</span>
-      <h3>¿Las extensiones de pestañas debilitan tus pestañas? La verdad cuando las aplica una profesional</h3>
-      <p>Es uno de los mitos más extendidos. Te explicamos qué daña realmente las pestañas y por qué una buena aplicación las mantiene sanas.</p>
-      <span class="more">Leer artículo →</span>
-    </a>
-      </div>
-    </div>
-  </section>
-</main>
-<main class="article-view" id="articulo-extensiones-de-pestanas-no-debilitan" data-title="¿Las extensiones de pestañas debilitan tus pestañas? La verdad cuando las aplica una profesional | Lashes &amp; Beauty Badalona" hidden>
-  <section class="post-hero">
-    <div class="wrap narrow">
-      <a class="back" href="#blog">← Volver al blog</a>
-      <span class="eyebrow">Pestañas · 5 min de lectura</span>
-      <h1>¿Las extensiones de pestañas debilitan tus pestañas? La verdad cuando las aplica una profesional</h1>
-    </div>
-  </section>
-  <article class="wrap narrow post">
-
-<p class="lead">"Me han dicho que las extensiones estropean las pestañas." Es probablemente la duda que más escuchamos en el centro. La respuesta corta: <strong>unas extensiones bien aplicadas por una profesional no debilitan tus pestañas ni hacen que pierdas densidad</strong>. Lo que las daña es una mala aplicación o una mala retirada. Te explicamos por qué.</p>
-
-<h2>Primero: tus pestañas se caen solas (y es normal)</h2>
-<p>Cada pestaña tiene su propio ciclo de vida: crece, descansa y se cae de forma natural para dejar paso a una nueva. Es normal perder <strong>entre 1 y 5 pestañas al día</strong>. Cuando llevas extensiones, cada extensión está pegada a una pestaña natural, así que cae junto a ella cuando le llega su momento. Ver alguna extensión en la almohada no significa que se estén cayendo pestañas de más: es el ciclo natural.</p>
-
-<h2>Qué daña de verdad las pestañas</h2>
-<p>Cuando alguien ha tenido una mala experiencia, casi siempre se debe a alguno de estos errores:</p>
-<ul>
-  <li><strong>Extensiones demasiado pesadas o largas</strong> para la pestaña natural. Si la pestaña no puede soportar el peso, se debilita y puede caer antes de tiempo.</li>
-  <li><strong>Pestañas pegadas entre sí.</strong> Si una extensión une dos o más pestañas naturales, cuando una intenta crecer o caer, tira de las demás. Esto sí provoca roturas y pérdida.</li>
-  <li><strong>Pegamento sobre el párpado o en la raíz.</strong> Puede irritar el folículo.</li>
-  <li><strong>Retirarlas en casa</strong> tirando de ellas o con productos inadecuados, lo que arranca la pestaña natural.</li>
-</ul>
-
-<h2>Cómo trabajamos para proteger tus pestañas</h2>
-<ul>
-  <li><strong>Valoramos tus pestañas naturales</strong> antes de empezar: grosor, longitud y fuerza. El diseño se adapta a lo que tus pestañas pueden soportar, no al revés.</li>
-  <li><strong>Aislamos cada pestaña</strong> y aplicamos la extensión de forma individual, sin pegar pestañas entre sí.</li>
-  <li><strong>Elegimos el peso y grosor adecuados.</strong> Las técnicas de volumen (3D, 5D, Wispy…) usan abanicos de fibras ultrafinas y ligeras, de modo que el peso total sigue siendo seguro.</li>
-  <li><strong>Dejamos una pequeña separación del párpado</strong>, para que el adhesivo nunca toque la piel ni el folículo.</li>
-  <li>Usamos <strong>adhesivos profesionales</strong> específicos para pestañas.</li>
-  <li><strong>Retirada profesional</strong> con un producto que disuelve el adhesivo, sin tirones.</li>
-</ul>
-
-<h2>Los cuidados en casa también cuentan</h2>
-<ul>
-  <li>Las primeras 24 horas, evita mojarlas, el vapor y la sauna para que el adhesivo cure bien.</li>
-  <li>Límpialas a diario con una espuma específica, como nuestra <strong>mousse limpiadora</strong>, y péinalas con un cepillito.</li>
-  <li>Evita desmaquillantes y cremas con aceite en la zona de los ojos.</li>
-  <li>No las frotes ni las arranques, y si puedes, evita dormir boca abajo.</li>
-  <li>Haz el <strong>retoque cada 2–3 semanas</strong>: así retiramos las extensiones que han crecido demasiado y mantenemos el peso equilibrado.</li>
-  <li>Si quieres un extra de fuerza, un <strong>sérum de pestañas</strong> ayuda a nutrirlas y fortalecerlas.</li>
-</ul>
-
-<h2>¿Y si quiero descansar de las extensiones?</h2>
-<p>Puedes hacerlo cuando quieras, pero no es imprescindible si están bien aplicadas y las mantienes con retoques. Si decides quitarlas, ven al centro: la <strong>retirada profesional</strong> es rápida y no daña la pestaña natural. Y si prefieres un look natural mientras tanto, el <strong>lifting de pestañas coreano</strong> es una gran alternativa.</p>
-
-<div class="prices">
-  <h3>Extensiones en Lashes &amp; Beauty Badalona</h3>
-  <ul>
-    <li><span>Efecto rímel</span><b>59 € · retoque 39 €</b></li>
-    <li><span>Híbridas</span><b>65 € · retoque 45 €</b></li>
-    <li><span>Volumen ruso elegante 3D</span><b>69 € · retoque 50 €</b></li>
-    <li><span>Volumen ruso glam 5D</span><b>75 € · retoque 55 €</b></li>
-    <li><span>Wispy / efecto mojado</span><b>79 € · retoque 59 €</b></li>
-    <li><span>Retirada de extensiones del centro</span><b>15 €</b></li>
-  </ul>
-</div>
-
-    <div class="cta">
-      <h3>¿Tienes dudas o quieres reservar?</h3>
-      <p>Escríbenos y te asesoramos sin compromiso, o reserva directamente tu cita online.</p>
-      <div class="ctas">
-        <a class="btn btn-gold js-book" href="#" target="_blank" rel="noopener">Reservar cita</a>
-        <a class="btn btn-outline js-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
-      </div>
-    </div>
-  </article>
-  <section class="more-posts">
-    <div class="wrap">
-      <h2 class="section-title">Sigue leyendo</h2>
-      <div class="posts">
-        <a class="post-card" href="#articulo-depilacion-facial-con-hilo">
-      <span class="kicker">Depilación · 4 min de lectura</span>
-      <h3>Por qué la depilación facial con hilo es la mejor opción para tu piel</h3>
-      <p>Precisa, higiénica y respetuosa incluso con las pieles más sensibles. Te contamos por qué el hilo es nuestra técnica favorita para cejas y rostro.</p>
-      <span class="more">Leer artículo →</span>
-    </a><a class="post-card" href="#articulo-microblading-proceso-cicatrizacion">
-      <span class="kicker">Cejas · 6 min de lectura</span>
-      <h3>Microblading: en qué consiste y cómo es el proceso de cicatrización día a día</h3>
-      <p>Qué esperar en la sesión, cómo evoluciona la ceja día a día y los cuidados para que el resultado sea perfecto y duradero.</p>
-      <span class="more">Leer artículo →</span>
-    </a>
-      </div>
-    </div>
-  </section>
-</main>
 
 
 <footer>
@@ -843,6 +316,7 @@
     <svg class="foot-logo" viewBox="0 0 260 62" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"><path d="M6 8Q60 58 114 8M16.8 17.0l-7.1 9.6M34.1 27.2l-5.7 12.8M51.4 32.4l-2.1 13.8M68.6 32.4l2.1 13.8M85.9 27.2l5.7 12.8M103.2 17.0l7.1 9.6"/><path transform="translate(135 0)" d="M6 8Q60 58 114 8M16.8 17.0l-7.1 9.6M34.1 27.2l-5.7 12.8M51.4 32.4l-2.1 13.8M68.6 32.4l2.1 13.8M85.9 27.2l5.7 12.8M103.2 17.0l7.1 9.6"/></g></svg>
     © <span id="year"></span> Lashes &amp; Beauty Badalona · Via Augusta, 5 · 08911 Badalona ·
     <a href="https://www.instagram.com/lashesandbeautybadalona/" target="_blank" rel="noopener">Instagram</a>
+      <p class="legal-links"><a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · <a href="cookies.html">Cookies</a></p>
   </div>
 </footer>
 
@@ -850,6 +324,7 @@
   <svg viewBox="0 0 32 32"><path d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.2-3.8 1.2 1.2-3.7-.3-.4c-1.2-1.8-1.8-3.8-1.8-5.9C5 10 9.9 5.2 16 5.2S27 10 27 15.8s-4.9 10.6-11 10.6zm6-7.9c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.7-1.6-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-1.1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.1 1.4 3.4c.2.2 2.3 3.5 5.6 4.9 2.8 1.1 3.3.9 3.9.8.6-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.1-.3-.2-.6-.3z"/></svg>
 </a></aside>
 
+<script src="assets/menu.js"></script>
 <script src="assets/app.js"></script>
 </body>
 </html>

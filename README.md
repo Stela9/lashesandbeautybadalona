@@ -15,3 +15,7 @@ Sitio estático publicado con Cloudflare Pages: cada cambio en la rama `main` se
 | `assets/fonts/` | Tipografías (servidas desde la propia web, sin Google Fonts) |
 | `_headers` | Cabeceras de seguridad y caché de Cloudflare Pages |
 | `404.html`, `robots.txt`, `sitemap.xml` | Página de error, instrucciones para buscadores y mapa del sitio |
+| `assets/site.css` | Estilos compartidos por todas las páginas |
+| `assets/menu.js` | Menú desplegable del móvil (todas las páginas) |
+| `blog/` | Índice del blog y un archivo por artículo |
+| `aviso-legal.html`, `privacidad.html`, `cookies.html` | Páginas legales (LSSI y RGPD) |
