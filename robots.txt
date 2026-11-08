@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lashesandbeautybadalona.pages.dev/sitemap.xml
