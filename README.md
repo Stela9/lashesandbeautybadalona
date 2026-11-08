@@ -1,7 +1,7 @@
 # Lashes & Beauty Badalona
 
 Web del centro de estética Lashes & Beauty Badalona (Via Augusta, 5 · Badalona).
-Sitio estático publicado con Cloudflare Pages: cada cambio en la rama `main` se publica automáticamente.
+Web: https://lashesandbeautybadalona.es — sitio estático publicado con Cloudflare Pages: cada cambio en la rama `main` se publica automáticamente.
 
 ## Estructura
 
@@ -19,3 +19,4 @@ Sitio estático publicado con Cloudflare Pages: cada cambio en la rama `main` se
 | `assets/menu.js` | Menú desplegable del móvil (todas las páginas) |
 | `blog/` | Índice del blog y un archivo por artículo |
 | `aviso-legal.html`, `privacidad.html`, `cookies.html` | Páginas legales (LSSI y RGPD) |
+| `functions/_middleware.js` | Redirige `www.` y `*.pages.dev` al dominio principal `lashesandbeautybadalona.es` |
