@@ -155,7 +155,7 @@ document.querySelectorAll(".review").forEach(r => {
 });
 
 /* Enlaces antiguos a artículos (#articulo-...) llevan a su nueva página del blog */
-if (location.hash.startsWith("#articulo-")) location.replace("blog/" + location.hash.slice(10) + ".html");
+if (location.hash.startsWith("#articulo-")) location.replace("blog/" + location.hash.slice(10));
 
 /* Mapa: solo se carga (y solo conecta con Google) cuando la visitante lo pide */
 document.getElementById("map-load").addEventListener("click", () => {
