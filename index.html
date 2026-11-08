@@ -239,9 +239,17 @@
   @media (max-width:820px){.regalo-grid{grid-template-columns:1fr;gap:36px}.gift-card{width:min(340px,92%)}}
   @media (max-width:600px){section{padding:36px 0}.hero{padding:36px 0 34px}.hero-logo{width:150px}
     .badges{margin-top:24px;gap:10px;display:grid;grid-template-columns:repeat(3,1fr);font-size:.78rem}.badges strong{font-size:1.5rem}
-    .features{grid-template-columns:1fr 1fr;gap:10px}.feature{padding:14px}.feature .ico{display:none}.feature h3{font-size:1.25rem;margin:4px 0}.feature p{font-size:.82rem}
+    .features{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.feature h3{overflow-wrap:anywhere;hyphens:auto}.feature{padding:14px}.feature .ico{display:none}.feature h3{font-size:1.25rem;margin:4px 0}.feature p{font-size:.82rem}
     .tabs{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;margin:0 -20px 20px;padding:0 20px 6px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto}
     .video-frame{width:min(200px,58%)}}
+  .bf-banner{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:10px 20px;background:linear-gradient(90deg,#0f0e0c,#2a241b 50%,#0f0e0c);color:var(--ivory);text-decoration:none;font-size:.88rem;text-align:center;border-bottom:1px solid var(--accent)}
+  .bf-tag{font-family:"Bebas Neue",sans-serif;letter-spacing:.12em;font-size:1.05rem;background:linear-gradient(90deg,#c9a45e,#f1d79b,#c9a45e);color:#141210;padding:2px 12px;border-radius:4px}
+  .bf-text b{color:#e2c48f}
+  .bf-cta{color:#e2c48f;font-weight:600;white-space:nowrap}
+  .tab-bf{background:#141210 !important;border-color:#c9a45e !important;color:#e2c48f !important;font-weight:600}
+  .tab-bf[aria-selected="true"]{box-shadow:0 0 0 2px #e2c48f inset}
+  .bf-short{display:none}
+  @media (max-width:760px){.bf-banner{gap:4px 8px;font-size:.8rem;padding:8px 12px;flex-wrap:wrap}.bf-long{display:none}.bf-short{display:inline}.bf-tag{font-size:.9rem;padding:1px 8px;white-space:nowrap}.bf-short,.bf-cta{white-space:nowrap}}
 </style>
 </head>
 <body>
@@ -260,6 +268,12 @@
   </div>
 </header>
 
+<a id="bf-banner" class="bf-banner" href="#servicios" hidden>
+  <span class="bf-tag">Black Friday</span>
+  <span class="bf-text bf-long">Hasta <b>-60%</b> en microblading, I-MODEL, dermapen con exosomas e Hydraface · Para citas hasta el 30 de noviembre</span>
+  <span class="bf-text bf-short">Hasta <b>-60%</b> · hasta el 30/11</span>
+  <span class="bf-cta">Ver promos →</span>
+</a>
 <main id="home">
   <!-- HERO -->
   <section class="hero">
@@ -718,7 +732,20 @@ const WA_TEXT     = "Hola! Me gustaría pedir información sobre vuestros servic
 
 /* price: precio en euros.  old: precio anterior tachado (opcional).
    retoque: precio del retoque (opcional).  badge: etiqueta destacada (opcional). */
-const SERVICES = {
+/* ===== BLACK FRIDAY =====
+   Se muestra automáticamente hasta la fecha BF_HASTA y después desaparece sola. */
+const BF_HASTA = "2026-12-01T00:00:00+01:00";   // fin del 30 de noviembre (hora de España)
+const BLACK_FRIDAY = [
+    { sub:"Promociones Black Friday", note:"Para citas hasta el 30 de noviembre.", items:[
+        { name:"Microblading / micropigmentación de cejas", desc:"Cejas perfectas y naturales a un precio único. Incluye un retoque a las 4 semanas.", price:150, old:250, badge:"-40%" },
+        { name:"Remodelación corporal I-MODEL · Bono 10 sesiones", desc:"Tonificación, reducción de celulitis, quema de grasa y moldeado de la figura.", price:195, old:490, badge:"-60%" },
+        { name:"Dermapen con exosomas · Bono 4 sesiones", desc:"Regeneración anti-edad extrema: más firmeza y elasticidad, menos arrugas y poros.", price:195, old:316, badge:"-38%" },
+        { name:"Hydraface – limpieza facial profunda", desc:"Limpieza profunda, dermoabrasión, exfoliación, extracción de impurezas e hidratación.", time:"1 h 15 min", price:59, old:99, badge:"-40%" } ]},
+];
+const BF_ACTIVO = Date.now() < new Date(BF_HASTA).getTime();
+/* ======================== */
+
+let SERVICES = {
   "Cejas": [
     { sub:"Diseño y depilación con hilo", items:[
         { name:"Depilación de cejas con hilo", desc:"Técnica natural y nada agresiva, ideal para pieles sensibles.", time:"15 min", price:11 },
@@ -802,6 +829,11 @@ document.querySelectorAll(".js-wa-gift").forEach(a => a.href = `https://wa.me/${
 document.getElementById("year").textContent = new Date().getFullYear();
 
 const tabsEl = document.getElementById("tabs"), listEl = document.getElementById("services");
+if (BF_ACTIVO) {
+  SERVICES = { "Black Friday": BLACK_FRIDAY, ...SERVICES };
+  document.getElementById("bf-banner").hidden = false;
+  document.getElementById("bf-banner").addEventListener("click", () => render("Black Friday"));
+}
 const cats = ["Todos", ...Object.keys(SERVICES)];
 const card = s => `
     <article class="svc">
@@ -819,7 +851,7 @@ function render(cat){
   tabsEl.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.cat === cat));
   listEl.innerHTML = cat === "Todos" ? Object.keys(SERVICES).map(c => group(c, true)).join("") : group(cat, false);
 }
-tabsEl.innerHTML = cats.map(c => `<button class="tab" role="tab" data-cat="${c}">${c}</button>`).join("");
+tabsEl.innerHTML = cats.map(c => `<button class="tab${c === "Black Friday" ? " tab-bf" : ""}" role="tab" data-cat="${c}">${c === "Black Friday" ? "★ Black Friday" : c}</button>`).join("");
 tabsEl.addEventListener("click", e => { if (e.target.dataset.cat) render(e.target.dataset.cat); });
 render("Todos");
 
