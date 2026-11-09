@@ -289,5 +289,3 @@
   .deposit td{text-align:right;font-weight:600;color:var(--accent-dark);white-space:nowrap}
   .deposit thead th:last-child{text-align:right}
   .deposit tr:last-child th,.deposit tr:last-child td{border-bottom:0}
-  .book-note{text-align:center;font-size:.85rem;color:var(--muted);margin-top:8px}
-  .book-note a{color:var(--accent-dark)}
