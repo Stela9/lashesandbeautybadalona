@@ -11,7 +11,7 @@ const WA_TEXT     = "Hola! Me gustaría pedir información sobre vuestros servic
    Se muestra automáticamente hasta la fecha BF_HASTA y después desaparece sola. */
 const BF_HASTA = document.getElementById("bf-banner").dataset.hasta;   // se edita en index.html (aviso de Black Friday)
 const BLACK_FRIDAY = [
-    { sub:"Promociones Black Friday", note:"Para citas hasta el 30 de noviembre.", items:[
+    { sub:"Promociones Black Friday", note:"Para citas hasta el 30 de noviembre. Reserva por WhatsApp con paga y señal.", items:[
         { name:"Microblading / micropigmentación de cejas", desc:"Cejas perfectas y naturales a un precio único. Incluye un retoque a las 4 semanas.", price:150, old:250, badge:"-40%", wa:true },
         { name:"Remodelación corporal I-MODEL · Bono 10 sesiones", desc:"Tonificación, reducción de celulitis, quema de grasa y moldeado de la figura. Precio normal: 49 € por sesión. Bono válido durante 1 año desde la compra.", price:195, old:490, badge:"-60%", wa:true },
         { name:"Dermapen con exosomas · Bono 4 sesiones", desc:"Regeneración anti-edad extrema: más firmeza y elasticidad, menos arrugas y poros. Precio normal: 79 € por sesión. Bono válido durante 1 año desde la compra.", price:195, old:316, badge:"-38%", wa:true },
