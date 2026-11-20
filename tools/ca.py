@@ -66,9 +66,19 @@ def alternates(t, es, ca):
     m = re.search(r'<link rel="canonical" href="[^"]*">', t)
     return t[:m.end()] + links + t[m.end():]
 
-def switcher(t, href, lang, label, where):
-    t = re.sub(r'\n      <li><a class="lang-switch"[^\n]*</li>', "", t)
-    return rep(t, IG, IG + f'\n      <li><a class="lang-switch" href="{href}" hreflang="{lang}" lang="{lang}">{label}</a></li>', 1, where)
+FLAG_ES = '<svg viewBox="0 0 30 20" width="24" height="16" aria-hidden="true"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg>'
+FLAG_CA = '<svg viewBox="0 0 27 18" width="24" height="16" aria-hidden="true"><rect width="27" height="18" fill="#FCDD09"/><g fill="#DA121A"><rect y="2" width="27" height="2"/><rect y="6" width="27" height="2"/><rect y="10" width="27" height="2"/><rect y="14" width="27" height="2"/></g></svg>'
+
+def switcher(t, es_url, ca_url, current, where):
+    """Franja superior con las banderas de España y Cataluña para cambiar de idioma."""
+    t = re.sub(r'\n      <li><a class="lang-switch"[^\n]*</li>', "", t)           # antiguo enlace del menú
+    t = re.sub(r'<nav class="langbar".*?</nav>\n', "", t, flags=re.S)
+    cur = lambda l: ' aria-current="true"' if l == current else ''
+    bar = (f'<nav class="langbar" aria-label="{"Idioma" if current == "ca" else "Idioma"}"><div class="wrap">'
+           f'<a class="flag" href="{es_url}" hreflang="es" lang="es"{cur("es")}>{FLAG_ES}<span>Castellano</span></a>'
+           f'<a class="flag" href="{ca_url}" hreflang="ca" lang="ca"{cur("ca")}>{FLAG_CA}<span>Català</span></a>'
+           f'</div></nav>\n')
+    return rep(t, "<header>", bar + "<header>", 1, where)
 
 # ------------------------------------------------------------------ cabecera, menú y pie
 def common_ca(t, where, home=False):
@@ -635,12 +645,12 @@ def main():
     for key, (es_file, es_url, ca_file, ca_url) in PAGES.items():
         # página en catalán
         ca = alternates(built[key], es_url, ca_url)
-        ca = switcher(ca, es_url, "es", "Castellano", ca_file)
+        ca = switcher(ca, es_url, ca_url, "ca", ca_file)
         wr(ca_file, ca)
         # página en castellano: hreflang + enlace «Català»
         es = rd(es_file)
         es = alternates(es, es_url, ca_url)
-        es = switcher(es, ca_url, "ca", "Català", es_file)
+        es = switcher(es, es_url, ca_url, "es", es_file)
         wr(es_file, es)
     # sitemap con las dos versiones
     urls = [v[1] for v in PAGES.values() if v[1] not in ("/aviso-legal", "/privacidad", "/cookies")]

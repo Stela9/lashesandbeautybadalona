@@ -289,8 +289,12 @@
   .deposit td{text-align:right;font-weight:600;color:var(--accent-dark);white-space:nowrap}
   .deposit thead th:last-child{text-align:right}
   .deposit tr:last-child th,.deposit tr:last-child td{border-bottom:0}
-  /* --- Selector de idioma --- */
-  .nav ul a.lang-switch{border:1px solid var(--line);border-radius:999px;padding:3px 12px;color:var(--ink)}
-  .nav ul a.lang-switch:hover{border-color:var(--accent)}
-  @media (max-width:1000px){.nav ul a.lang-switch{border:0;border-radius:0;padding:14px 20px;color:var(--accent-dark);font-weight:600}}
   @media (min-width:1001px) and (max-width:1180px){.nav ul{gap:16px;font-size:.86rem}}
+  /* --- Selector de idioma (banderas) --- */
+  .langbar{background:var(--bg-alt);border-bottom:1px solid var(--line)}
+  .langbar .wrap{display:flex;justify-content:flex-end;gap:4px;padding-top:3px;padding-bottom:3px}
+  .flag{display:inline-flex;align-items:center;gap:7px;min-height:30px;padding:3px 10px;border-radius:999px;text-decoration:none;font-size:.78rem;font-weight:500;color:var(--muted)}
+  .flag svg{display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(22,20,18,.15)}
+  .flag:not([aria-current]) svg{opacity:.75}
+  .flag:hover{color:var(--ink)}.flag:hover svg{opacity:1}
+  .flag[aria-current]{color:var(--ink);font-weight:600;background:var(--card);box-shadow:0 0 0 1px var(--line)}
