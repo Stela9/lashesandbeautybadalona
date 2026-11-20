@@ -7,10 +7,14 @@ const fs = require("fs"), path = require("path");
 const ROOT = path.join(__dirname, "..");
 const FILE = path.join(ROOT, "index.html");
 
+// Sustituye lo que hay entre <!--NOMBRE--> y <!--/NOMBRE-->. Exige que cada marca
+// aparezca exactamente una vez, para no duplicar nunca la carta.
 const between = (html, name, inner) => {
-  const re = new RegExp(`<!--${name}-->[\\s\\S]*?(<!--/${name}-->|(?=</div>))`);
-  if (!re.test(html)) throw new Error("No encuentro la marca " + name);
-  return html.replace(re, `<!--${name}-->${inner}<!--/${name}-->`);
+  const open = `<!--${name}-->`, close = `<!--/${name}-->`;
+  const count = s => html.split(s).length - 1;
+  if (count(open) !== 1 || count(close) !== 1) throw new Error(`Marcas ${name} incorrectas (${count(open)} de apertura, ${count(close)} de cierre)`);
+  const i = html.indexOf(open) + open.length, j = html.indexOf(close);
+  return html.slice(0, i) + inner + html.slice(j);
 };
 
 (async () => {
@@ -29,5 +33,10 @@ const between = (html, name, inner) => {
   html = between(html, "CARTA-FILTROS", tabs);
   html = between(html, "CARTA-SERVICIOS", services);
   fs.writeFileSync(FILE, html);
+  const b2 = await chromium.launch(), p2 = await b2.newPage();
+  await p2.goto("file://" + FILE);
+  const fuera = await p2.$$eval(".svc", s => s.filter(x => !x.closest("#services")).length);
+  await b2.close();
+  if (fuera) throw new Error(`Hay ${fuera} tarjetas fuera de la carta: revisa index.html`);
   console.log(`Carta copiada en index.html: ${n} servicios.`);
 })();
