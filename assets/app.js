@@ -5,6 +5,12 @@ const BOOKING_URL = "https://widget.treatwell.es/establecimiento/lashes-beauty-b
 const WHATSAPP    = "34659344275";
 const WA_TEXT     = "Hola! Me gustaría pedir información sobre vuestros servicios 😊";
 
+/* IDIOMA: los textos están en castellano; en las páginas en catalán (<html lang="ca">)
+   se traducen con el diccionario de assets/i18n-ca.js. Los precios están solo aquí. */
+const LANG = document.documentElement.lang === "ca" ? "ca" : "es";
+const I18N = (LANG === "ca" && window.I18N_CA) || {};
+const t = s => (s && Object.prototype.hasOwnProperty.call(I18N, s)) ? I18N[s] : s;
+
 /* price: precio en euros.  old: precio anterior tachado (opcional).
    retoque: precio del retoque (opcional).  badge: etiqueta destacada (opcional). */
 /* ===== BLACK FRIDAY =====
@@ -34,14 +40,14 @@ const IMG_ALT = {
 
 /* Fotos de resultados (recortadas del cartel «Realza tu mirada») */
 const IMG = {
-  "lifting-tinte": "assets/img/lifting-tinte.jpg",
-  "laminado-cejas": "assets/img/laminado-cejas.jpg",
-  "efecto-rimel": "assets/img/efecto-rimel.jpg",
-  "hibridas": "assets/img/hibridas.jpg",
-  "volumen-3d": "assets/img/volumen-3d.jpg",
-  "volumen-glam": "assets/img/volumen-glam.jpg",
-  "wispy": "assets/img/wispy.jpg",
-  "efecto-mojado": "assets/img/efecto-mojado.jpg"
+  "lifting-tinte": "/assets/img/lifting-tinte.jpg",
+  "laminado-cejas": "/assets/img/laminado-cejas.jpg",
+  "efecto-rimel": "/assets/img/efecto-rimel.jpg",
+  "hibridas": "/assets/img/hibridas.jpg",
+  "volumen-3d": "/assets/img/volumen-3d.jpg",
+  "volumen-glam": "/assets/img/volumen-glam.jpg",
+  "wispy": "/assets/img/wispy.jpg",
+  "efecto-mojado": "/assets/img/efecto-mojado.jpg"
 };
 
 let SERVICES = {
@@ -121,10 +127,10 @@ let SERVICES = {
 /* ========================================================== */
 
 const fmt = n => n.toLocaleString("es-ES",{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2}) + " €";
-const waLink = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(WA_TEXT)}`;
+const waLink = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t(WA_TEXT))}`;
 document.querySelectorAll(".js-book").forEach(a => a.href = BOOKING_URL);
 document.querySelectorAll(".js-wa").forEach(a => a.href = waLink);
-document.querySelectorAll(".js-wa-gift").forEach(a => a.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hola! Me gustaría comprar una tarjeta regalo 🎁")}`);
+document.querySelectorAll(".js-wa-gift").forEach(a => a.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t("Hola! Me gustaría comprar una tarjeta regalo 🎁"))}`);
 document.getElementById("year").textContent = new Date().getFullYear();
 
 const tabsEl = document.getElementById("tabs"), listEl = document.getElementById("services");
@@ -134,27 +140,27 @@ if (BF_ACTIVO) {
 }
 const cats = ["Todos", ...Object.keys(SERVICES)];
 const card = (s, h = 4) => `
-    <article class="svc${s.img ? ' has-img' : ''}">${s.img ? `<img class="svc-img" src="${IMG[s.img]}" alt="${IMG_ALT[s.img] || s.name}" loading="lazy" width="124" height="58">` : ''}<div class="svc-body">
+    <article class="svc${s.img ? ' has-img' : ''}">${s.img ? `<img class="svc-img" src="${IMG[s.img]}" alt="${t(IMG_ALT[s.img]) || t(s.name)}" loading="lazy" width="124" height="58">` : ''}<div class="svc-body">
       <div class="svc-top">
-        <h${h} class="svc-name">${s.name}${s.badge ? ` <span class="badge">${s.badge}</span>` : ''}</h${h}>
-        <div class="price">${(s.from ? '<small>desde</small>' : '') + fmt(s.price) + (s.old ? `<s>${fmt(s.old)}</s>` : '')}</div>
+        <h${h} class="svc-name">${t(s.name)}${s.badge ? ` <span class="badge">${t(s.badge)}</span>` : ''}</h${h}>
+        <div class="price">${(s.from ? `<small>${t("desde")}</small>` : '') + fmt(s.price) + (s.old ? `<s>${fmt(s.old)}</s>` : '')}</div>
       </div>
-      <p>${s.desc}</p>${s.retoque ? `<p class="ret">Retoque (3ª semana): <b>${fmt(s.retoque)}</b></p>` : ''}
+      <p>${t(s.desc)}</p>${s.retoque ? `<p class="ret">${t("Retoque (3ª semana):")} <b>${fmt(s.retoque)}</b></p>` : ''}
       <div class="meta"><span>${s.time ? '⏱ ' + s.time : ''}</span>
-        ${s.product ? '<span class="instore">Producto · venta en el centro</span>'
-          : s.wa ? `<a href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hola! Quiero reservar la promo de Black Friday: " + s.name + " (" + fmt(s.price) + ")")}" target="_blank" rel="noopener">Reservar por WhatsApp →</a>`
-          : `<a href="${BOOKING_URL}" target="_blank" rel="noopener">Reservar →</a>`}</div>
+        ${s.product ? `<span class="instore">${t("Producto · venta en el centro")}</span>`
+          : s.wa ? `<a href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t("Hola! Quiero reservar la promo de Black Friday: ") + t(s.name) + " (" + fmt(s.price) + ")")}" target="_blank" rel="noopener">${t("Reservar por WhatsApp →")}</a>`
+          : `<a href="${BOOKING_URL}" target="_blank" rel="noopener">${t("Reservar →")}</a>`}</div>
     </div></article>`;
 const group = (cat, showTitle) => {
   const L = showTitle ? 4 : 3;   // con «Todos»: h3 categoría > h4 apartado > h5 servicio
-  return (showTitle ? `<h3 class="cat-title">${cat}</h3>` : '') +
-    SERVICES[cat].map(g => `<h${L} class="sub-title">${g.sub}${g.note ? `<span>${g.note}</span>` : ''}</h${L}>` + g.items.map(s => card(s, L + 1)).join("")).join("");
+  return (showTitle ? `<h3 class="cat-title">${t(cat)}</h3>` : '') +
+    SERVICES[cat].map(g => `<h${L} class="sub-title">${t(g.sub)}${g.note ? `<span>${t(g.note)}</span>` : ''}</h${L}>` + g.items.map(s => card(s, L + 1)).join("")).join("");
 };
 function render(cat){
   tabsEl.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-pressed", String(t.dataset.cat === cat)));
   listEl.innerHTML = cat === "Todos" ? Object.keys(SERVICES).map(c => group(c, true)).join("") : group(cat, false);
 }
-tabsEl.innerHTML = cats.map(c => `<button type="button" class="tab${c === "Black Friday" ? " tab-bf" : ""}" aria-pressed="false" data-cat="${c}">${c === "Black Friday" ? "★ Black Friday" : c}</button>`).join("");
+tabsEl.innerHTML = cats.map(c => `<button type="button" class="tab${c === "Black Friday" ? " tab-bf" : ""}" aria-pressed="false" data-cat="${c}">${c === "Black Friday" ? "★ Black Friday" : t(c)}</button>`).join("");
 tabsEl.addEventListener("click", e => {
   const b = e.target.closest(".tab"); if (!b) return;
   render(b.dataset.cat);
@@ -167,23 +173,23 @@ document.querySelectorAll(".review").forEach((r, i) => {
   const q = r.querySelector("blockquote"), btn = document.createElement("button");
   const who = r.querySelector("figcaption b").textContent;
   q.id = q.id || "resena-" + (i + 1);
-  btn.className = "rv-more"; btn.type = "button"; btn.textContent = "Leer más";
+  btn.className = "rv-more"; btn.type = "button"; btn.textContent = t("Leer más");
   btn.setAttribute("aria-expanded", "false"); btn.setAttribute("aria-controls", q.id);
-  btn.setAttribute("aria-label", "Leer la reseña completa de " + who);
+  btn.setAttribute("aria-label", t("Leer la reseña completa de ") + who);
   q.after(btn);
   const check = () => btn.classList.toggle("show", r.classList.contains("open") || q.scrollHeight > q.clientHeight + 2);
   btn.addEventListener("click", () => {
     const open = r.classList.toggle("open");
-    btn.textContent = open ? "Leer menos" : "Leer más";
+    btn.textContent = open ? t("Leer menos") : t("Leer más");
     btn.setAttribute("aria-expanded", String(open));
-    btn.setAttribute("aria-label", (open ? "Mostrar menos de la reseña de " : "Leer la reseña completa de ") + who);
+    btn.setAttribute("aria-label", (open ? t("Mostrar menos de la reseña de ") : t("Leer la reseña completa de ")) + who);
     check();
   });
   check(); window.addEventListener("resize", check);
 });
 
 /* Enlaces antiguos a artículos (#articulo-...) llevan a su nueva página del blog */
-if (location.hash.startsWith("#articulo-")) location.replace("blog/" + location.hash.slice(10));
+if (LANG === "es" && location.hash.startsWith("#articulo-")) location.replace("blog/" + location.hash.slice(10));
 
 /* Mapa: solo se carga (y solo conecta con Google) cuando la visitante lo pide */
 document.getElementById("map-load").addEventListener("click", () => {
@@ -194,7 +200,7 @@ document.getElementById("map-load").addEventListener("click", () => {
 
 /* Vídeo: botón de pausa y respeto a «reducir movimiento» */
 const vid = document.getElementById("centro-video"), vbtn = document.getElementById("video-btn");
-const setV = playing => { vbtn.textContent = playing ? "❚❚ Pausar vídeo" : "▶ Reproducir vídeo"; vbtn.setAttribute("aria-pressed", String(!playing)); };
+const setV = playing => { vbtn.textContent = playing ? t("❚❚ Pausar vídeo") : t("▶ Reproducir vídeo"); vbtn.setAttribute("aria-pressed", String(!playing)); };
 if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { vid.removeAttribute("autoplay"); vid.pause(); }
 setV(!vid.paused && vid.autoplay);
 vid.addEventListener("play", () => setV(true)); vid.addEventListener("pause", () => setV(false));

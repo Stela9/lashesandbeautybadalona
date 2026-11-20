@@ -1,27 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://lashesandbeautybadalona.es/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lashesandbeautybadalona.es/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://lashesandbeautybadalona.es/ca/"/>
+  </url>
+  <url>
+    <loc>https://lashesandbeautybadalona.es/ca/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lashesandbeautybadalona.es/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://lashesandbeautybadalona.es/ca/"/>
   </url>
   <url>
     <loc>https://lashesandbeautybadalona.es/blog/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lashesandbeautybadalona.es/blog/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://lashesandbeautybadalona.es/ca/blog/"/>
+  </url>
+  <url>
+    <loc>https://lashesandbeautybadalona.es/ca/blog/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lashesandbeautybadalona.es/blog/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://lashesandbeautybadalona.es/ca/blog/"/>
   </url>
   <url>
     <loc>https://lashesandbeautybadalona.es/blog/depilacion-facial-con-hilo</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lashesandbeautybadalona.es/blog/depilacion-facial-con-hilo"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://lashesandbeautybadalona.es/ca/blog/depilacio-facial-amb-fil"/>
+  </url>
+  <url>
+    <loc>https://lashesandbeautybadalona.es/ca/blog/depilacio-facial-amb-fil</loc>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lashesandbeautybadalona.es/blog/depilacion-facial-con-hilo"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://lashesandbeautybadalona.es/ca/blog/depilacio-facial-amb-fil"/>
   </url>
   <url>
     <loc>https://lashesandbeautybadalona.es/blog/microblading-proceso-cicatrizacion</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lashesandbeautybadalona.es/blog/microblading-proceso-cicatrizacion"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://lashesandbeautybadalona.es/ca/blog/microblading-proces-cicatritzacio"/>
+  </url>
+  <url>
+    <loc>https://lashesandbeautybadalona.es/ca/blog/microblading-proces-cicatritzacio</loc>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lashesandbeautybadalona.es/blog/microblading-proceso-cicatrizacion"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://lashesandbeautybadalona.es/ca/blog/microblading-proces-cicatritzacio"/>
   </url>
   <url>
     <loc>https://lashesandbeautybadalona.es/blog/extensiones-de-pestanas-no-debilitan</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lashesandbeautybadalona.es/blog/extensiones-de-pestanas-no-debilitan"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://lashesandbeautybadalona.es/ca/blog/extensions-de-pestanyes-no-debiliten"/>
+  </url>
+  <url>
+    <loc>https://lashesandbeautybadalona.es/ca/blog/extensions-de-pestanyes-no-debiliten</loc>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lashesandbeautybadalona.es/blog/extensiones-de-pestanas-no-debilitan"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://lashesandbeautybadalona.es/ca/blog/extensions-de-pestanyes-no-debiliten"/>
   </url>
   <url>
     <loc>https://lashesandbeautybadalona.es/condiciones</loc>
-    <lastmod>2026-11-09</lastmod>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lashesandbeautybadalona.es/condiciones"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://lashesandbeautybadalona.es/ca/condicions"/>
+  </url>
+  <url>
+    <loc>https://lashesandbeautybadalona.es/ca/condicions</loc>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lashesandbeautybadalona.es/condiciones"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://lashesandbeautybadalona.es/ca/condicions"/>
   </url>
 </urlset>

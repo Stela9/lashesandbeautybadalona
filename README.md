@@ -20,4 +20,20 @@ Web: https://lashesandbeautybadalona.es — sitio estático publicado con Cloudf
 | `blog/` | Índice del blog y un archivo por artículo |
 | `aviso-legal.html`, `privacidad.html`, `cookies.html` | Páginas legales (LSSI y RGPD) |
 | `functions/_middleware.js` | Redirige `www.` y `*.pages.dev` al dominio principal `lashesandbeautybadalona.es` |
-| `tools/carta.js` | Copia la carta de servicios dentro de `index.html` (para que funcione sin JavaScript). **Ejecutar `node tools/carta.js` cada vez que se cambien servicios o precios en `assets/app.js`** |
+| `tools/carta.js` | Copia la carta de servicios dentro de `index.html` y `ca/index.html` (para que funcione sin JavaScript). **Ejecutar `node tools/carta.js` cada vez que se cambien servicios o precios en `assets/app.js`** |
+| `ca/` | Versión en catalán (generada: no editar a mano) |
+| `assets/i18n-ca.js` | Traducción al catalán de la carta de servicios y de los botones |
+| `tools/ca.py` | Genera `ca/` a partir de las páginas en castellano y añade el selector de idioma y `hreflang` a todas |
+
+## Cómo hacer cambios
+
+1. Edita las páginas en castellano (y `assets/app.js` para servicios y precios).
+2. Si cambias un texto, cambia también su traducción en `tools/ca.py` (páginas) o en `assets/i18n-ca.js` (carta).
+3. Ejecuta, en este orden:
+
+```
+python3 tools/ca.py
+node tools/carta.js
+```
+
+`tools/ca.py` se detiene si no encuentra un texto en castellano que debería traducir, y `tools/carta.js` si en la carta catalana queda algo sin traducir.
